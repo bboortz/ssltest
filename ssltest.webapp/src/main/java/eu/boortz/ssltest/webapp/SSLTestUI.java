@@ -23,6 +23,7 @@ import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.ValoTheme;
 
 import eu.boortz.ssltest.testclient.Log;
+import eu.boortz.ssltest.testclient.clients.settings.CustomSettings;
 import eu.boortz.ssltest.testclient.factory.SSLContextFactory;
 import eu.boortz.ssltest.testclient.tester.ITester;
 import eu.boortz.ssltest.testclient.tester.TestSSLCustomCiphersAndCustomTrustChain;
@@ -58,9 +59,11 @@ public class SSLTestUI extends UI {
 	private FormLayout inputLayoutMainTab2 = new FormLayout();
 	
 	private TextField defaultProtocolsTextFieldOutputLayoutMainTab1 = new TextField("DEFAULT PROTOCOLS");
-	private TextArea defaultCiphersTextFieldOutputLayoutMainTab1 = new TextArea("DEFAULT CIHPERS");
+	private TextArea defaultCiphersTextAreaOutputLayoutMainTab1 = new TextArea("DEFAULT CIHPERS");
 	private CheckBox wantClientAuthTextFieldOutputLayoutMainTab1 = new CheckBox("Want Client Auth", false);
 	private CheckBox needClientAuthTextFieldOutputLayoutMainTab1 = new CheckBox("Need Client Auth", false);
+	private TextField customProtocolsTextFieldOutputLayoutMainTab1 = new TextField("CUSTOM PROTOCOLS");
+	private TextArea customCiphersTextAreaOutputLayoutMainTab1 = new TextArea("CUSTOM CIHPERS");
 	
 	private TextField uriTextFieldInputLayoutMainTab2 = new TextField("URI");
 	private OptionGroup optionGroupInputLayoutMainTab2 = new OptionGroup("SSL TEST OPTION");
@@ -134,17 +137,20 @@ public class SSLTestUI extends UI {
 		layoutMainTab1.addComponent(outputLayoutMainTab1);
 		
 		defaultProtocolsTextFieldOutputLayoutMainTab1.setWidth("100%");
-		defaultCiphersTextFieldOutputLayoutMainTab1.setWidth("100%");
+		defaultCiphersTextAreaOutputLayoutMainTab1.setWidth("100%");
+		customProtocolsTextFieldOutputLayoutMainTab1.setWidth("100%");
+		customCiphersTextAreaOutputLayoutMainTab1.setWidth("100%");
 		
 		wantClientAuthTextFieldOutputLayoutMainTab1.setEnabled(false);
 		needClientAuthTextFieldOutputLayoutMainTab1.setEnabled(false);
 		
 		
 		outputLayoutMainTab1.addComponent(defaultProtocolsTextFieldOutputLayoutMainTab1);
-		outputLayoutMainTab1.addComponent(defaultCiphersTextFieldOutputLayoutMainTab1);
+		outputLayoutMainTab1.addComponent(defaultCiphersTextAreaOutputLayoutMainTab1);
 		outputLayoutMainTab1.addComponent(wantClientAuthTextFieldOutputLayoutMainTab1);
 		outputLayoutMainTab1.addComponent(needClientAuthTextFieldOutputLayoutMainTab1);
-		
+		outputLayoutMainTab1.addComponent(customProtocolsTextFieldOutputLayoutMainTab1);
+		outputLayoutMainTab1.addComponent(customCiphersTextAreaOutputLayoutMainTab1);
 		
 		// main tab 2
 		layoutMainTab2.addComponent(inputLayoutMainTab2);
@@ -162,17 +168,18 @@ public class SSLTestUI extends UI {
 		StringBuilder sb = null;
 		SSLContext sslContext = SSLContextFactory.newInstance();
 		
-		// retrieve client protocols
+		// retrieve client default protocols
 		resultArr = sslContext.getDefaultSSLParameters().getProtocols();
 		defaultProtocolsTextFieldOutputLayoutMainTab1.setValue( Arrays.toString(resultArr) );
+
 		
-		// retrieve client ciphers
+		// retrieve client default ciphers
 		resultArr = sslContext.getDefaultSSLParameters().getCipherSuites();
 		sb = new StringBuilder();
 		for (String item : resultArr) {
 			sb.append(item + "\n");
 		}
-		defaultCiphersTextFieldOutputLayoutMainTab1.setValue( sb.toString() );
+		defaultCiphersTextAreaOutputLayoutMainTab1.setValue( sb.toString() );
 		
 		
 		// retrieve client auth options
@@ -180,6 +187,23 @@ public class SSLTestUI extends UI {
         boolean need = sslContext.getDefaultSSLParameters().getNeedClientAuth();
 		wantClientAuthTextFieldOutputLayoutMainTab1.setValue(want);
 		needClientAuthTextFieldOutputLayoutMainTab1.setValue(need);
+		
+		
+		// retrieve client custom protocols
+		resultArr = CustomSettings.SSL_PROTOCOLS;
+		customProtocolsTextFieldOutputLayoutMainTab1.setValue( Arrays.toString(resultArr) );
+		
+		
+		// retrieve client custom ciphers
+		resultArr = CustomSettings.SSL_CIPHERS;
+		sb = new StringBuilder();
+		for (String item : resultArr) {
+			sb.append(item + "\n");
+		}
+		customCiphersTextAreaOutputLayoutMainTab1.setValue( sb.toString() );
+				
+		
+		
 
 	}
 	
@@ -249,8 +273,8 @@ public class SSLTestUI extends UI {
 					
 				} catch (Exception e2) {
 					Log.logSevere(e2.getMessage());
+					e2.printStackTrace();
 				}
-//				System.out.println("send request: " + inputLayout.g.getItemProperty(URI).getValue());
 			}
 		});
 
