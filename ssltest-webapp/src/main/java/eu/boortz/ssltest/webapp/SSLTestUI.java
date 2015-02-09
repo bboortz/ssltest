@@ -85,6 +85,7 @@ public class SSLTestUI extends UI {
 	private TextArea defaultCiphersTextAreaOutputLayoutMainTab1 = new TextArea("DEFAULT CIHPERS");
 	private CheckBox wantClientAuthTextFieldOutputLayoutMainTab1 = new CheckBox("Want Client Auth", false);
 	private CheckBox needClientAuthTextFieldOutputLayoutMainTab1 = new CheckBox("Need Client Auth", false);
+	private TextArea acceptedCertIssuerTextAreaOutputLayoutMainTab1 = new TextArea("ACCEPTED CERT ISSUER");
 	private TextField customProtocolsTextFieldOutputLayoutMainTab1 = new TextField("MEDIUM PROTOCOLS");
 	private TextArea customCiphersTextAreaOutputLayoutMainTab1 = new TextArea("MEDIUM CIHPERS");
 	
@@ -212,17 +213,18 @@ public class SSLTestUI extends UI {
 		
 		defaultProtocolsTextFieldOutputLayoutMainTab1.setWidth("100%");
 		defaultCiphersTextAreaOutputLayoutMainTab1.setWidth("100%");
+		acceptedCertIssuerTextAreaOutputLayoutMainTab1.setWidth("100%");
 		customProtocolsTextFieldOutputLayoutMainTab1.setWidth("100%");
 		customCiphersTextAreaOutputLayoutMainTab1.setWidth("100%");
 		
 		wantClientAuthTextFieldOutputLayoutMainTab1.setEnabled(false);
 		needClientAuthTextFieldOutputLayoutMainTab1.setEnabled(false);
 		
-		
 		outputLayoutMainTab1.addComponent(defaultProtocolsTextFieldOutputLayoutMainTab1);
 		outputLayoutMainTab1.addComponent(defaultCiphersTextAreaOutputLayoutMainTab1);
 		outputLayoutMainTab1.addComponent(wantClientAuthTextFieldOutputLayoutMainTab1);
 		outputLayoutMainTab1.addComponent(needClientAuthTextFieldOutputLayoutMainTab1);
+		outputLayoutMainTab1.addComponent(acceptedCertIssuerTextAreaOutputLayoutMainTab1);
 		outputLayoutMainTab1.addComponent(customProtocolsTextFieldOutputLayoutMainTab1);
 		outputLayoutMainTab1.addComponent(customCiphersTextAreaOutputLayoutMainTab1);
 		
@@ -275,6 +277,13 @@ public class SSLTestUI extends UI {
 		wantClientAuthTextFieldOutputLayoutMainTab1.setValue(want);
 		needClientAuthTextFieldOutputLayoutMainTab1.setValue(need);
 		
+		// retrieve accepted cert issuert
+		resultArr = DefaultSettings.getTrustedCertificateStrings();
+		sb = new StringBuilder();
+		for (String item : resultArr) {
+			sb.append(item + "\n");
+		}
+		acceptedCertIssuerTextAreaOutputLayoutMainTab1.setValue(sb.toString());
 		
 		// retrieve client custom protocols
 		resultArr = MediumSettings.SSL_PROTOCOLS;
