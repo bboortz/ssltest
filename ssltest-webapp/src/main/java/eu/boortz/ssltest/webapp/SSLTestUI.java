@@ -22,17 +22,17 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.ValoTheme;
 
-import eu.boortz.ssltest.testclient.Log;
-import eu.boortz.ssltest.testclient.clients.settings.CustomSettings;
-import eu.boortz.ssltest.testclient.factory.SSLContextFactory;
-import eu.boortz.ssltest.testclient.tester.ITester;
-import eu.boortz.ssltest.testclient.tester.TestSSLCustomCiphersAndCustomTrustChain;
-import eu.boortz.ssltest.testclient.tester.TestSSLCustomCiphersAndDefaultTrustChain;
-import eu.boortz.ssltest.testclient.tester.TestSSLDefaultCipherAndCustomTrustChain;
-import eu.boortz.ssltest.testclient.tester.TestSSLDefaultCipherAndDefaultTrustChain;
-import eu.boortz.ssltest.testclient.tester.TestSSLDefaults;
-import eu.boortz.ssltest.testclient.tester.TestSSLSecure;
-import eu.boortz.ssltest.testclient.tester.TestSSLWeak;
+import eu.boortz.ssltest.lib.Log;
+import eu.boortz.ssltest.lib.clients.settings.CustomSettings;
+import eu.boortz.ssltest.lib.factory.SSLContextFactory;
+import eu.boortz.ssltest.lib.tester.ITester;
+import eu.boortz.ssltest.lib.tester.TestSSLCustomCiphersAndCustomTrustChain;
+import eu.boortz.ssltest.lib.tester.TestSSLCustomCiphersAndDefaultTrustChain;
+import eu.boortz.ssltest.lib.tester.TestSSLDefaultCipherAndCustomTrustChain;
+import eu.boortz.ssltest.lib.tester.TestSSLDefaultCipherAndDefaultTrustChain;
+import eu.boortz.ssltest.lib.tester.TestSSLDefaults;
+import eu.boortz.ssltest.lib.tester.TestSSLSecure;
+import eu.boortz.ssltest.lib.tester.TestSSLWeak;
 
 /* 
  * UI class is the starting point for your app. You may deploy it with VaadinServlet

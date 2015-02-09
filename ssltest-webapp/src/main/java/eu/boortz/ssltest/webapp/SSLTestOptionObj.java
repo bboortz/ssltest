@@ -3,7 +3,7 @@
  */
 package eu.boortz.ssltest.webapp;
 
-import eu.boortz.ssltest.testclient.tester.ITester;
+import eu.boortz.ssltest.lib.tester.ITester;
 
 /**
  * @author benni

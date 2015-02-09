@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>eu.boortz.ssltest</groupId>
-	<artifactId>ssltest-client</artifactId>
+	<artifactId>ssltest-lib</artifactId>
 	<version>1.0</version>
 
 	<dependencies>
@@ -17,12 +17,6 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.3.6</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>eu.boortz.ssltest</groupId>
-			<artifactId>ssltest-lib</artifactId>
-			<version>1.0</version>
 		</dependency>
 
 	</dependencies>

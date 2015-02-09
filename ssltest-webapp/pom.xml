@@ -60,7 +60,7 @@
 		</dependency>
 		<dependency>
 			<groupId>eu.boortz.ssltest</groupId>
-			<artifactId>ssltest-client</artifactId>
+			<artifactId>ssltest-lib</artifactId>
 			<version>1.0</version>
 		</dependency>
 	</dependencies>
