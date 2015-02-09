@@ -116,7 +116,6 @@ public class SSLTestUI extends UI {
 	private ArrayList<SSLTrustChainOption> sslTrustChainOptionObjListMainTab3 = new ArrayList<SSLTrustChainOption>();
 
 	{
-		System.out.println(System.getProperty("javax.net.ssl.trustStore"));
 		sslTestOptionObjListMainTab2.add( new SSLTestOptionObj("SSL Defaults", new TestSSLDefaults()) );
 		sslTestOptionObjListMainTab2.add( new SSLTestOptionObj("SSL Secure", new TestSSLSecure()) );
 		sslTestOptionObjListMainTab2.add( new SSLTestOptionObj("SSL Medium", new TestSSLMedium()) );
