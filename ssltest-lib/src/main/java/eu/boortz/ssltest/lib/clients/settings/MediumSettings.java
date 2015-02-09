@@ -17,15 +17,15 @@ import eu.boortz.ssltest.lib.factory.SSLContextFactory;
  * @author benni
  *
  */
-public class SecureSettings  {
+public class MediumSettings  {
 	
-	public static final String 			FORBIDDEN_PROTOCOL_TAGS 	= "SSL.*|TLSv1|TLSv1.1";
-	public static final String 			FORBIDDEN_CIPHER_TAGS 		= ".*NULL.*|.*RC4.*|.*DES.*|.*MD2.*|.*MD4.*|.*MD5.*|.*SHA";
+	public static final String 			FORBIDDEN_PROTOCOL_TAGS 	= ".*SSL.*";
+	public static final String 			FORBIDDEN_CIPHER_TAGS 		= ".*NULL.*|.*RC4.*|.*DES.*|.*MD2.*|.*MD4.*|.*MD5.*";
 	
 	
 	public static final KeyStore 				TRUST_STORE 		= null;
 	public static final TrustStrategy 			TRUST_STRATEGY 		= null;
-	public static final X509HostnameVerifier 	HOSTNAME_VERIFIER 	= SSLConnectionSocketFactory.STRICT_HOSTNAME_VERIFIER;
+	public static final X509HostnameVerifier 	HOSTNAME_VERIFIER 	= SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER;
 	public static final String[]				_SSL_PROTOCOLS		= SSLContextFactory.newInstance().createSSLEngine().getSupportedProtocols();
 	public static final String[]				_SSL_CIPHERS		= SSLContextFactory.newInstance().createSSLEngine().getSupportedCipherSuites();
 	
@@ -60,6 +60,5 @@ public class SecureSettings  {
 		SSL_CIPHERS = customCiphers.toArray(new String[0]);
 		
 	}
-
 	
 }

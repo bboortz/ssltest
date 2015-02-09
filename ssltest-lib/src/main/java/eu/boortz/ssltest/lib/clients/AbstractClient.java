@@ -20,7 +20,7 @@ import eu.boortz.ssltest.lib.clients.settings.DefaultSettings;
 import eu.boortz.ssltest.lib.exception.ClientConnectException;
 import eu.boortz.ssltest.lib.exception.PrepareConnectException;
 
-public abstract class AbstractClient implements IClient {
+public abstract class AbstractClient implements ISSLClient {
 	
 	protected X509HostnameVerifier 	hostnameVerifier 	= DefaultSettings.HOSTNAME_VERIFIER; 
 	

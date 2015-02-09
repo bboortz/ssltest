@@ -9,8 +9,7 @@ import org.junit.Test;
 
 import eu.boortz.ssltest.lib.TestSettings;
 import eu.boortz.ssltest.lib.exception.ClientConnectException;
-import eu.boortz.ssltest.lib.tester.ITester;
-import eu.boortz.ssltest.lib.tester.TestSSLDefaults;
+import eu.boortz.ssltest.lib.tester.predefined.TestSSLDefaults;
 
 /**
  * @author benni

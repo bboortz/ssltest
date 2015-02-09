@@ -8,8 +8,7 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import eu.boortz.ssltest.lib.TestSettings;
-import eu.boortz.ssltest.lib.tester.ITester;
-import eu.boortz.ssltest.lib.tester.TestSSLCustomCiphersAndCustomTrustChain;
+import eu.boortz.ssltest.lib.tester.predefined.TestSSLWeakCiphersAndWeakTrustChain;
 
 
 /**
@@ -18,7 +17,7 @@ import eu.boortz.ssltest.lib.tester.TestSSLCustomCiphersAndCustomTrustChain;
  */
 public class TestSSLCustomCiphersAndCustomTrustChainTest {
 
-	private static ITester tester = new TestSSLCustomCiphersAndCustomTrustChain();
+	private static ITester tester = new TestSSLWeakCiphersAndWeakTrustChain();
 
 	/**
 	 * Test method for {@link eu.boortz.ssltest.lib.tester.TestSSLCiphers#testURI(java.lang.String)}.

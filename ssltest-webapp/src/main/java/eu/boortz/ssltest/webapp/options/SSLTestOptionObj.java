@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.boortz.ssltest.webapp;
+package eu.boortz.ssltest.webapp.options;
 
 import eu.boortz.ssltest.lib.tester.ITester;
 

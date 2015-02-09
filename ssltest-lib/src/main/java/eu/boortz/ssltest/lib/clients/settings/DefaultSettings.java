@@ -23,7 +23,7 @@ public class DefaultSettings  {
 	public static final TrustStrategy 			TRUST_STRATEGY 		= null;
 	public static final X509HostnameVerifier 	HOSTNAME_VERIFIER 	= SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER;
 	public static final String[]				SSL_PROTOCOLS		= SSLContextFactory.newInstance().getDefaultSSLParameters().getProtocols(); 	
-	public static final String[]				SSL_CIPHERS			= SSLContextFactory.newInstance().getDefaultSSLParameters().getCipherSuites(); 
+	public static final String[]				SSL_CIPHERS			= SSLContextFactory.newInstance().getDefaultSSLParameters().getCipherSuites();
 			    
 	
 }

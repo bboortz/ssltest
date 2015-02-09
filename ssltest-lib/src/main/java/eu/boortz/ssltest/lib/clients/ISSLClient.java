@@ -12,7 +12,7 @@ import eu.boortz.ssltest.lib.exception.PrepareConnectException;
  * @author benni
  *
  */
-public interface IClient {
+public interface ISSLClient {
 	
 	public HttpResponse getUri(String uri) throws ClientConnectException, PrepareConnectException;
 	

@@ -9,8 +9,7 @@ import org.junit.Test;
 
 import eu.boortz.ssltest.lib.TestSettings;
 import eu.boortz.ssltest.lib.exception.ClientConnectException;
-import eu.boortz.ssltest.lib.tester.ITester;
-import eu.boortz.ssltest.lib.tester.TestSSLCustomCiphersAndDefaultTrustChain;
+import eu.boortz.ssltest.lib.tester.predefined.TestSSLSecureCiphersAndWeakTrustChain;
 
 /**
  * @author benni
@@ -18,7 +17,7 @@ import eu.boortz.ssltest.lib.tester.TestSSLCustomCiphersAndDefaultTrustChain;
  */
 public class TestSSLCustomCiphersAndDefaultTrustChainTest {
 
-	private static ITester tester = new TestSSLCustomCiphersAndDefaultTrustChain();
+	private static ITester tester = new TestSSLSecureCiphersAndWeakTrustChain();
 
 	/**
 	 * Test method for {@link eu.boortz.ssltest.lib.tester.TestSSLCiphers#testURI(java.lang.String)}.

@@ -12,7 +12,7 @@ import org.apache.http.conn.ssl.X509HostnameVerifier;
  * @author benni
  *
  */
-public interface ICustomSSLClient extends IClient {
+public interface ICustomSSLClient extends ISSLClient {
 	
 	public void setHostnameVerifier(X509HostnameVerifier verifier);
 	public void setTrustStore(KeyStore trustStore);

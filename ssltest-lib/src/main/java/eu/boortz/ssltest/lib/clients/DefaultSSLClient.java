@@ -19,7 +19,7 @@ import eu.boortz.ssltest.lib.factory.SSLContextFactory;
  * @author benni
  *
  */
-public class DefaultSSLClient extends AbstractClient implements IClient {
+public class DefaultSSLClient extends AbstractClient implements ISSLClient {
 	
 	
 	
