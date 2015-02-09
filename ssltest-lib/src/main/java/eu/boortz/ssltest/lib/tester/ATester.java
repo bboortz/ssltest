@@ -26,10 +26,12 @@ public class ATester implements ITester {
 	/* (non-Javadoc)
 	 * @see eu.boortz.ssltest.lib.tester.ITester#testURI(java.lang.String)
 	 */
-	public void testURI(String uri) throws ClientConnectException, PrepareConnectException {
-		HttpResponse response = this.client.getUri(uri);
+	public HttpResponse testURI(String uri) throws ClientConnectException, PrepareConnectException {
+		HttpResponse response = this.client.headUri(uri);
 		
 		Log.logURIInfo(uri, response.getStatusLine().toString());
+		
+		return response;
 	}
 
 	public String[] getSupportedSSLProtocols(String uri) throws ClientConnectException, PrepareConnectException {

@@ -6,7 +6,7 @@ package eu.boortz.ssltest.lib.clients;
 import javax.net.ssl.SSLContext;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpHead;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 
@@ -27,7 +27,7 @@ public class DefaultSSLClient extends AbstractClient implements ISSLClient {
 	/* (non-Javadoc)
 	 * @see eu.boortz.ssltest.lib.IClient#getUri(java.lang.String)
 	 */
-	public HttpResponse getUri(String uri, String[] sslProtocols, String[] sslCiphers) throws ClientConnectException, PrepareConnectException {
+	public HttpResponse headUri(String uri, String[] sslProtocols, String[] sslCiphers) throws ClientConnectException, PrepareConnectException {
 		HttpResponse result = null;
 	
 		
@@ -41,11 +41,12 @@ public class DefaultSSLClient extends AbstractClient implements ISSLClient {
 		
 		// prepare apache http client
 		CloseableHttpClient httpClient = HttpClientFactory.newInstance(sslsf);
-		HttpGet httpGet = new HttpGet(uri);
+//		HttpGet httpGet = new HttpGet(uri);
+		HttpHead httpRequest = new HttpHead(uri);
 			
 			
 		// execute request
-		result = this.executeQuery(httpGet, httpClient, httpGet);
+		result = this.executeQuery(httpRequest, httpClient);
 		
 
 				

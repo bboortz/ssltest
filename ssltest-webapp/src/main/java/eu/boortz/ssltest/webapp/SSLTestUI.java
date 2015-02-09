@@ -5,6 +5,8 @@ import java.util.Arrays;
 
 import javax.net.ssl.SSLContext;
 
+import org.apache.http.HttpResponse;
+
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.server.VaadinRequest;
@@ -114,6 +116,7 @@ public class SSLTestUI extends UI {
 	private ArrayList<SSLTrustChainOption> sslTrustChainOptionObjListMainTab3 = new ArrayList<SSLTrustChainOption>();
 
 	{
+		System.out.println(System.getProperty("javax.net.ssl.trustStore"));
 		sslTestOptionObjListMainTab2.add( new SSLTestOptionObj("SSL Defaults", new TestSSLDefaults()) );
 		sslTestOptionObjListMainTab2.add( new SSLTestOptionObj("SSL Secure", new TestSSLSecure()) );
 		sslTestOptionObjListMainTab2.add( new SSLTestOptionObj("SSL Medium", new TestSSLMedium()) );
@@ -337,8 +340,9 @@ public class SSLTestUI extends UI {
 				
 			
 				// pretest
+				HttpResponse response = null;
 				try {
-					tester.testURI(uri);
+					response = tester.testURI(uri);
 				} catch (Exception e1) {
 					statusTextFieldOutputLayoutHostWindow.setValue(e1.getMessage());
 					reachableCheckBoxOutputLayoutHostWindow.setValue(false);
@@ -346,7 +350,7 @@ public class SSLTestUI extends UI {
 					return;
 				}
 				reachableCheckBoxOutputLayoutHostWindow.setValue(true);
-				
+				statusTextFieldOutputLayoutHostWindow.setValue(response.getStatusLine().toString());
 				
 				
 				try {	
@@ -411,8 +415,9 @@ public class SSLTestUI extends UI {
 				
 			
 				// pretest
+				HttpResponse response = null;
 				try {
-					tester.testURI(uri);
+					response = tester.testURI(uri);
 				} catch (Exception e1) {
 					statusTextFieldOutputLayoutHostWindow.setValue(e1.getMessage());
 					reachableCheckBoxOutputLayoutHostWindow.setValue(false);
@@ -420,6 +425,7 @@ public class SSLTestUI extends UI {
 					return;
 				}
 				reachableCheckBoxOutputLayoutHostWindow.setValue(true);
+				statusTextFieldOutputLayoutHostWindow.setValue(response.getStatusLine().toString());
 				
 				
 				

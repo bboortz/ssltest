@@ -14,9 +14,9 @@ import eu.boortz.ssltest.lib.exception.PrepareConnectException;
  */
 public interface ISSLClient {
 	
-	public HttpResponse getUri(String uri) throws ClientConnectException, PrepareConnectException;
+	public HttpResponse headUri(String uri) throws ClientConnectException, PrepareConnectException;
 	
-	public HttpResponse getUri(String uri, String[] sslProtocols, String[] sslCiphers) throws ClientConnectException, PrepareConnectException;
+	public HttpResponse headUri(String uri, String[] sslProtocols, String[] sslCiphers) throws ClientConnectException, PrepareConnectException;
 	
 	public String[] getSupportedSSLProtocols(String uri) throws ClientConnectException, PrepareConnectException;
 	

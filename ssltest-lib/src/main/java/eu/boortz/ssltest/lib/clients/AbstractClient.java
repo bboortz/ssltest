@@ -10,7 +10,6 @@ import javax.net.ssl.SSLHandshakeException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.conn.ssl.X509HostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -31,10 +30,10 @@ public abstract class AbstractClient implements ISSLClient {
 	/* (non-Javadoc)
 	 * @see eu.boortz.ssltest.lib.IClient#getUri(java.lang.String)
 	 */
-	public HttpResponse getUri(String uri) throws ClientConnectException, PrepareConnectException {
+	public HttpResponse headUri(String uri) throws ClientConnectException, PrepareConnectException {
 		this.checkURI(uri);
 		
-		return this.getUri(uri, this.sslProtocols, this.sslCiphers);
+		return this.headUri(uri, this.sslProtocols, this.sslCiphers);
 	}
 	
 	
@@ -45,12 +44,12 @@ public abstract class AbstractClient implements ISSLClient {
 		
 		// pretest (is a connection possible? if not no further tests are needed)
 		this.checkURI(uri);
-		this.getUri(uri);
+		this.headUri(uri);
 
 		// test loop
 		for (String sslProtocol : this.sslProtocols) {
 			try {
-				this.getUri(uri, new String[] { sslProtocol }, this.sslCiphers);
+				this.headUri(uri, new String[] { sslProtocol }, this.sslCiphers);
 				list.add(sslProtocol);
 			} catch (Exception e) {
 //				e.printStackTrace();
@@ -67,12 +66,12 @@ public abstract class AbstractClient implements ISSLClient {
 		
 		// pretest (is a connection possible? if not no further tests are needed)
 		this.checkURI(uri);
-		this.getUri(uri);
+		this.headUri(uri);
 		
 		// test loop
 		for (String sslCipher : this.sslCiphers) {
 			try {
-				this.getUri(uri, this.sslProtocols, new String[] { sslCipher } );
+				this.headUri(uri, this.sslProtocols, new String[] { sslCipher } );
 				list.add(sslCipher);
 			} catch (Exception e) {
 //				e.printStackTrace();
@@ -85,7 +84,7 @@ public abstract class AbstractClient implements ISSLClient {
 	
 	
 	
-	public HttpResponse executeQuery(HttpUriRequest request, CloseableHttpClient httpClient, HttpGet httpGet) throws ClientConnectException, PrepareConnectException {
+	public HttpResponse executeQuery(HttpUriRequest request, CloseableHttpClient httpClient) throws ClientConnectException, PrepareConnectException {
 		HttpResponse result = null;
 		CloseableHttpResponse response = null;
 		

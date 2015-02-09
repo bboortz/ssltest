@@ -8,7 +8,7 @@ import java.security.KeyStore;
 import javax.net.ssl.SSLContext;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpHead;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.conn.ssl.X509HostnameVerifier;
@@ -36,7 +36,7 @@ public class CustomSSLClient extends AbstractClient implements ICustomSSLClient 
 	/* (non-Javadoc)
 	 * @see eu.boortz.ssltest.lib.IClient#getUri(java.lang.String)
 	 */
-	public HttpResponse getUri(String uri, String[] sslProtocols, String[] sslCiphers) throws ClientConnectException, PrepareConnectException {
+	public HttpResponse headUri(String uri, String[] sslProtocols, String[] sslCiphers) throws ClientConnectException, PrepareConnectException {
 		HttpResponse result = null;
 			
 		
@@ -60,11 +60,12 @@ public class CustomSSLClient extends AbstractClient implements ICustomSSLClient 
 		
 		// prepare apache http client
 		CloseableHttpClient httpClient = HttpClientFactory.newInstance(sslsf);
-		HttpGet httpGet = new HttpGet(uri);
+//		HttpGet httpRequest = new HttpGet(uri);
+		HttpHead httpRequest = new HttpHead(uri);
 		
 		
 		// execute request
-		result = this.executeQuery(httpGet, httpClient, httpGet);
+		result = this.executeQuery(httpRequest, httpClient);
 			
 				
 		return result;
