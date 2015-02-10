@@ -48,7 +48,7 @@ public class DefaultSettings  {
 	public static X509Certificate[] getTrustedCertificates() {
 		X509Certificate[] result = null;
 		
-		TrustManagerFactory tmf;
+		TrustManagerFactory tmf = null;
 		try {
 			tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());			
 			tmf.init((KeyStore) null);
@@ -73,5 +73,6 @@ public class DefaultSettings  {
 		return result;
 	}
 			    
+	
 	
 }
