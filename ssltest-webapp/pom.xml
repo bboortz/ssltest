@@ -6,7 +6,7 @@
 	<artifactId>ssltest-webapp</artifactId>
 	<packaging>war</packaging>
 	<version>1.0</version>
-	<name>test ssl web application</name>
+	<name>ssltest-webapp</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -61,6 +61,16 @@
 		<dependency>
 			<groupId>eu.boortz.ssltest</groupId>
 			<artifactId>ssltest-lib</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.boortz.ssltest</groupId>
+			<artifactId>ssltest-httpclient</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.boortz.ssltest</groupId>
+			<artifactId>ssltest-tester</artifactId>
 			<version>1.0</version>
 		</dependency>
 	</dependencies>

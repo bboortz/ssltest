@@ -5,8 +5,6 @@ import java.util.Arrays;
 
 import javax.net.ssl.SSLContext;
 
-import org.apache.http.HttpResponse;
-
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.server.VaadinRequest;
@@ -24,9 +22,12 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.ValoTheme;
 
+import eu.boortz.ssltest.httpclient.clients.HttpResponse;
+import eu.boortz.ssltest.httpclient.clients.https.HttpsUrlConnectionClient;
+import eu.boortz.ssltest.httpclient.clients.https.IHttpsClient;
+import eu.boortz.ssltest.httpclient.clients.settings.DefaultSettings;
+import eu.boortz.ssltest.httpclient.clients.settings.MediumSettings;
 import eu.boortz.ssltest.lib.Log;
-import eu.boortz.ssltest.lib.clients.settings.DefaultSettings;
-import eu.boortz.ssltest.lib.clients.settings.MediumSettings;
 import eu.boortz.ssltest.lib.factory.SSLContextFactory;
 import eu.boortz.ssltest.lib.tester.CustomTester;
 import eu.boortz.ssltest.lib.tester.ICustomTester;
@@ -74,12 +75,15 @@ public class SSLTestUI extends UI {
 	private VerticalLayout layoutMainTab1 = new VerticalLayout();
 	private VerticalLayout layoutMainTab2 = new VerticalLayout();
 	private VerticalLayout layoutMainTab3 = new VerticalLayout();
+	private VerticalLayout layoutMainTab4 = new VerticalLayout();
 	
 	private FormLayout outputLayoutMainTab1 = new FormLayout();
 	
 	private FormLayout inputLayoutMainTab2 = new FormLayout();
 	
 	private FormLayout inputLayoutMainTab3 = new FormLayout();
+	
+	private FormLayout inputLayoutMainTab4 = new FormLayout();
 	
 	private TextField defaultProtocolsTextFieldOutputLayoutMainTab1 = new TextField("DEFAULT PROTOCOLS");
 	private TextArea defaultCiphersTextAreaOutputLayoutMainTab1 = new TextArea("DEFAULT CIHPERS");
@@ -98,6 +102,9 @@ public class SSLTestUI extends UI {
 	private OptionGroup sslCiphersOptionGroupInputLayoutMainTab3 = new OptionGroup("SSL CIPHERS");
 	private OptionGroup sslTrustChainOptionGroupInputLayoutMainTab3 = new OptionGroup("SSL TRUSTCHAIN");
 	private Button sendButtonInputLayoutMainTab3 = new Button("Check URI");
+	
+	private TextField uriTextFieldInputLayoutMainTab4 = new TextField("URI");
+	private Button sendButtonInputLayoutMainTab4 = new Button("Check URI");
 	
 	
 	/* UI for host window */
@@ -183,6 +190,7 @@ public class SSLTestUI extends UI {
 		initTab1Data();
 		initTab2Data();
 		initTab3Data();
+		initTab4Data();
 		initButtons();
 	}
 
@@ -203,10 +211,12 @@ public class SSLTestUI extends UI {
 		layoutMainTab1.setMargin(true);
 		layoutMainTab2.setMargin(true);
 		layoutMainTab3.setMargin(true);
+		layoutMainTab4.setMargin(true);
 
 		mainTabSheet.addTab(layoutMainTab1, "CLIENT INFO");
 		mainTabSheet.addTab(layoutMainTab2, "CHECK URI - Predefined");
 		mainTabSheet.addTab(layoutMainTab3, "CHECK URI - Custom");
+		mainTabSheet.addTab(layoutMainTab4, "CHECK URI - HttpsUrlConnection");
 
 		// main tab 1
 		layoutMainTab1.addComponent(outputLayoutMainTab1);
@@ -249,6 +259,15 @@ public class SSLTestUI extends UI {
 		inputLayoutMainTab3.addComponent(sslCiphersOptionGroupInputLayoutMainTab3);
 		inputLayoutMainTab3.addComponent(sslTrustChainOptionGroupInputLayoutMainTab3);
 		inputLayoutMainTab3.addComponent(sendButtonInputLayoutMainTab3);
+		
+		
+		// main tab 4
+		layoutMainTab4.addComponent(inputLayoutMainTab4);
+		
+		uriTextFieldInputLayoutMainTab4.setWidth("100%");
+		
+		inputLayoutMainTab4.addComponent(uriTextFieldInputLayoutMainTab4);
+		inputLayoutMainTab4.addComponent(sendButtonInputLayoutMainTab4);
 	}
 
 
@@ -317,6 +336,11 @@ public class SSLTestUI extends UI {
 		sslProtocolsOptionGroupInputLayoutMainTab3.select(1);
 		sslCiphersOptionGroupInputLayoutMainTab3.select(1);
 		sslTrustChainOptionGroupInputLayoutMainTab3.select(1);
+	}
+	
+	
+	private void initTab4Data() {
+		uriTextFieldInputLayoutMainTab4.setValue(DEFAULT_URI);
 	}
 	
 
@@ -460,6 +484,67 @@ public class SSLTestUI extends UI {
 				}
 			}
 		});
+		
+		sendButtonInputLayoutMainTab4.addClickListener(new ClickListener() {
+			private static final long serialVersionUID = -3453483238129348595L;
+
+			public void buttonClick(ClickEvent event) {
+//				ICustomTester tester = new CustomTester();
+				IHttpsClient tester = new HttpsUrlConnectionClient();
+				String uri = uriTextFieldInputLayoutMainTab4.getValue();
+				
+				if (uri == null || uri.length() == 0 || ! uri.startsWith("https")) {
+					return;
+				}
+				
+				
+				showWindow();
+				uriTextFieldOutputLayoutHostWindow.setValue(uri);
+
+				
+				
+				Log.logInfo("check uri: " + uri);
+				
+			
+				// pretest
+				HttpResponse response = null;
+				try {
+					response = tester.headURI(uri);
+				} catch (Exception e1) {
+					statusTextFieldOutputLayoutHostWindow.setValue(e1.getMessage());
+					reachableCheckBoxOutputLayoutHostWindow.setValue(false);
+					Log.logSevere(e1.getMessage());
+					return;
+				}
+				reachableCheckBoxOutputLayoutHostWindow.setValue(true);
+				statusTextFieldOutputLayoutHostWindow.setValue(response.getStatusLine());
+				
+				
+				
+//				try {	
+//					String[] result = null;
+//					
+//					// get ssl protocols
+//					result = tester.getSupportedSSLProtocols(uri);;
+//					String sslProtocols = Arrays.toString(result);
+//					sslProtocolsTextFieldOutputLayoutHostWindow.setValue(sslProtocols);
+//					
+//					// get ssl ciphers
+//					result = tester.getSupportedSSLCiphers(uri);;
+//					StringBuilder sb = new StringBuilder();
+//					for (String protocol : result) {
+//						sb.append(protocol + "\n");
+//					}
+//					String sslCiphers = sb.toString();
+//					sslCiphersTextAreaOutputLayoutHostWindow.setValue(sslCiphers);
+//					
+//				} catch (Exception e2) {
+//					Log.logSevere(e2.getMessage());
+//					e2.printStackTrace();
+//				}
+			}
+		});
+
 
 
 	}

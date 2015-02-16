@@ -46,10 +46,10 @@ public class InfoLauncher {
 	        System.out.println();
 	        
 	        
-	        System.out.println("*** Endpoint Identification Algorithm ***");
-	        String algorithm = sslContext.getDefaultSSLParameters().getEndpointIdentificationAlgorithm();
-	        System.out.println("    " + algorithm);
-	        System.out.println();
+//	        System.out.println("*** Endpoint Identification Algorithm ***");
+////	        String algorithm = sslContext.getDefaultSSLParameters().getEndpointIdentificationAlgorithm();
+//	        System.out.println("    " + algorithm);
+//	        System.out.println();
 	        
 	        
 	        System.out.println("*** Client Authentication ***");
