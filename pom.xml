@@ -32,7 +32,7 @@
 
 	<packaging>pom</packaging>
 	<modules>
-		<module>ssltest-client</module>
+		<module>ssltest-cli</module>
 		<module>ssltest-httpclient</module>
 		<module>ssltest-lib</module>
 		<module>ssltest-tester</module>
