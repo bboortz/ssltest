@@ -29,15 +29,17 @@ public class SSLContextFactory {
 		SSLContext result = null;
 		
 		// prepare ssl connection
-		try {
-			result = SSLContexts.custom()
-					.useProtocol("TLSv1.2")
-					.build();
-		} catch (KeyManagementException e) {
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
+		result = SSLContexts.createDefault();
+//		try {
+//			result = SSLContexts.custom()
+//					.useProtocol("TLSv1.2")
+//					.build();
+			
+//		} catch (KeyManagementException e) {
+//			e.printStackTrace();
+//		} catch (NoSuchAlgorithmException e) {
+//			e.printStackTrace();
+//		}
 		
 		return result;
 	}
